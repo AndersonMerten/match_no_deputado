@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, Heading, Image, Stack, Text } from '@chakra-ui/react'
 
-const MostraDeputado = () => {
+const MostraDeputado = ({id}) => {
 
     const [deputado, setDeputado] = useState(null);
-
+   // id = 220593;
     useEffect(() => {
-        fetch('https://dadosabertos.camara.leg.br/api/v2/deputados/220593', {
+        fetch('https://dadosabertos.camara.leg.br/api/v2/deputados/'+id, {
             method: "GET",
             headers: {"Content-Type": "application/json"}
         }).then(data => {
@@ -58,12 +58,15 @@ const MostraDeputado = () => {
                 <Image
                     objectFit='cover'
                     maxW={{ base: '100%', sm: '200px' }}
+                    minH={400}
                     src={deputado.ultimoStatus.urlFoto}
-                    alt='Foto do parlamentar'/>
+                    alt='Foto do parlamentar'
+                    margin={"20px"}    
+                />
                 <Stack>
                     <CardBody>
                         <Heading>{deputado.ultimoStatus.nomeEleitoral}</Heading>
-                        <Text py={2}>
+                        <Text py={2} textAlign={"justify"} >
                             {converteCamelCase(deputado.nomeCivil)}, conhecid{sexoDeputado()} como {deputado.ultimoStatus.nomeEleitoral}, nasceu em {trataData(deputado.dataNascimento)} no municipio de {deputado.municipioNascimento} - {deputado.ufNascimento}.
                             Com formação {deputado.escolaridade} completa, foi eleit{sexoDeputado()} deputad{sexoDeputado()} federal em {trataData(deputado.ultimoStatus.data)},   filiad{sexoDeputado()} ao {deputado.ultimoStatus.siglaPartido}.                            
                             {converteCamelCase()}

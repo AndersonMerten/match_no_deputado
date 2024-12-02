@@ -3,7 +3,9 @@ import './index.css';
 import React, { useEffect, useState } from "react";
 import Header from './components/header';
 import ListaDeDeputados from './components/listaDeputados';
+import Votacao from './components/votacao';
 import { PrimeReactProvider } from 'primereact/api';
+import { Divider } from 'primereact/divider';
 
 
 function App() {
@@ -24,6 +26,9 @@ function App() {
 
     <div>
       <Header />
+      <Divider/>
+      <Votacao />
+      <Divider/>
       <ListaDeDeputados  deputados={deputados} />
     </div>
     </PrimeReactProvider>
